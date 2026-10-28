@@ -1,0 +1,14 @@
+{
+  "name": "Complex 4-7",
+  "short_name": "Complex 4-7",
+  "description": "A Titan II launch crew, one shift, 1980. Terminal prototype.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050806",
+  "theme_color": "#050806",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

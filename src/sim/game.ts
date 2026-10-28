@@ -937,10 +937,12 @@ export class Game {
 
   reportPower(): string {
     this.flags.powerReported = true;
-    const onDg = this.power.cb2;
+    const p = this.power;
+    const now = !p.busLive ? 'No bus power yet; diesel is coming up' : p.cb2 ? "We're on the diesel" : "We're back on commercial";
+    const fansOk = Object.values(this.fans).every((f) => f.running || f.tag);
     this.phone([
       ['CP', 'Command post.'],
-      ['YOU', `4-7. Lost commercial power at ${hhmmZ(this.flags.lastBusDrop as number)}. ${onDg ? "We're on the diesel" : "We're back on commercial"}. Equipment restarted.`],
+      ['YOU', `4-7. Lost commercial power at ${hhmmZ(this.flags.lastBusDrop as number)}. ${now}. ${fansOk ? 'Equipment restarted.' : 'Restarting equipment now.'}`],
       ['CP', 'Copy, 4-7. Utility has a line fault in your county. Advise any change.'],
     ]);
     return 'CALLING COMMAND POST';
