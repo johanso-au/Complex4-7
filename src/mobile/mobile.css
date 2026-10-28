@@ -188,9 +188,17 @@ table.t td.n { text-align: right; }
 .btns.row5 { flex-wrap: nowrap; gap: 5px; }
 .btns.row5 .btn { flex: 1; min-width: 0; padding: 6px 2px; font-size: 18px; }
 .btns.row5 .gap { width: 6px; flex: none; }
-.r.ctl { align-items: center; }
-.r.ctl .btns { margin: 4px 0; flex-wrap: nowrap; }
+.r.ctl { align-items: center; flex-wrap: wrap; }
+.r.ctl .btns { margin: 4px 0; flex-wrap: nowrap; margin-left: auto; }
 .r.ctl .btn { min-width: 70px; }
+.btn { overflow-wrap: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btns.col .btn, .btn.left { white-space: normal; }
+@media (max-width: 340px) {
+  .btns.row5 { gap: 3px; }
+  .btns.row5 .btn { font-size: 15px; }
+  .btns.row5 .gap { width: 2px; }
+  .tab { font-size: 14px; }
+}
 .btn {
   font: inherit;
   font-size: 20px;
@@ -301,7 +309,8 @@ table.t td.n { text-align: right; }
 /* ── tabs ── */
 #m-tabs {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  /* minmax(0, 1fr): seven equal columns even with enlarged system text. */
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   border-top: 1px solid var(--line);
   background: var(--panel);
   padding-bottom: env(safe-area-inset-bottom);
@@ -323,6 +332,7 @@ table.t td.n { text-align: right; }
   line-height: 1;
 }
 .tab:last-child { border-right: 0; }
+.tab { min-width: 0; overflow: hidden; white-space: nowrap; }
 .tab small { font-size: 13px; color: inherit; opacity: 0.7; margin-bottom: 3px; }
 .tab.cur { color: var(--bg); background: var(--green); }
 .tab em { position: absolute; top: 3px; right: 3px; font-style: normal; font-size: 13px; background: var(--amber); color: var(--bg); padding: 0 4px; min-width: 14px; }
@@ -360,7 +370,7 @@ table.t td.n { text-align: right; }
 .paper.doc p.w, .paper.doc p.cy, .paper.doc p.amb { color: var(--ink); }
 .termdoc p { white-space: pre-wrap; }
 .title { text-align: center; padding: 18vh 8px 20px; }
-.title .logo { font-size: 46px; letter-spacing: 0.3em; color: var(--white); margin-bottom: 14px; text-shadow: 0 0 12px rgba(77, 255, 136, 0.5); }
+.title .logo { font-size: clamp(30px, 11vw, 46px); letter-spacing: 0.18em; white-space: nowrap; color: var(--white); margin-bottom: 14px; text-shadow: 0 0 12px rgba(77, 255, 136, 0.5); }
 .title p { margin: 16px 0; }
 .title .small { font-size: 16px; }
 

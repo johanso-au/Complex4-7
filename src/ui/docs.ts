@@ -45,6 +45,8 @@ export const TITLE: DocLine[] = [
   { text: '' }, { text: '' },
   { text: 'Content: nuclear weapons, industrial accident, injury (reported, never shown).', c: C.DARK, x: 10 },
   { text: 'All codes, procedures and people are invented.', c: C.DARK, x: 10 },
+  { text: '' },
+  { text: `BUILD ${typeof __BUILD__ === 'string' ? __BUILD__ : 'dev'}`, c: C.DARK, x: 10 },
 ];
 
 export function changeoverLines(src: string[]): DocLine[] {

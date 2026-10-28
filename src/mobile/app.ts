@@ -114,7 +114,8 @@ export function startMobile() {
         body = '<div class="title"><div class="logo">COMPLEX 4-7</div><div class="cy">LAUNCH COMPLEX 4-7 &middot; TITAN II<br>17 SEPTEMBER 1980</div>'
           + '<p>You command a launch crew, deep underground. For twenty-four hours you decide what is real: the orders, the alarms, the people, and the machine itself.</p>'
           + '<p class="dim">Prototype shift &middot; terminal build. Sound on. About 15-20 minutes. Your phone stays awake while you play.</p>'
-          + '<p class="dim small">Nuclear weapons, industrial accident, injury (reported, never shown). All codes, procedures and people are invented.</p></div>';
+          + '<p class="dim small">Nuclear weapons, industrial accident, injury (reported, never shown). All codes, procedures and people are invented.</p>'
+          + `<p class="dim small">BUILD ${esc(__BUILD__)}</p></div>`;
         buttons = b('start', 'TAKE THE CHAIR', () => { audio.start(); setMode('manual'); }, 'primary')
           + b('jump', 'PLAYTEST: JUMP TO 0145Z', () => { audio.start(); restart('0145'); });
         break;
