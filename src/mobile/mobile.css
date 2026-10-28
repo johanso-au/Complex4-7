@@ -33,7 +33,10 @@ body.mobile #crt { display: none; }
   inset: 0;
   display: grid;
   grid-template-rows: auto auto 1fr auto auto;
+  /* minmax(0, 1fr): no child (e.g. a long one-line checklist step) may widen the layout past the screen. */
+  grid-template-columns: minmax(0, 1fr);
   max-width: 640px;
+  overflow: hidden;
   margin: 0 auto;
   background: var(--bg);
   padding-top: env(safe-area-inset-top);
@@ -49,6 +52,9 @@ body.mobile #crt { display: none; }
   background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.18) 3px, transparent 4px);
   z-index: 50;
 }
+#m-app > * { min-width: 0; }
+#m-body, .card, .portal, .binderbox, .mlist li, .r > span { overflow-wrap: anywhere; }
+.r > span { min-width: 0; }
 #m-app.docmode > :not(#m-doc) { display: none; }
 #m-doc { display: none; }
 #m-app.docmode { grid-template-rows: 1fr; }
@@ -222,7 +228,7 @@ table.t td.n { text-align: right; }
 
 .card { border: 1px solid var(--line); padding: 8px 10px; margin: 10px 0; background: var(--panel); }
 .card .ch { display: flex; justify-content: space-between; color: var(--cyan); margin-bottom: 4px; }
-.card dl { margin: 0; display: grid; grid-template-columns: 7.5em 1fr; gap: 2px 8px; font-size: 18px; }
+.card dl { margin: 0; display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 2px 8px; font-size: 18px; }
 .card dt { color: var(--dim); }
 .card dd { margin: 0; }
 .big { font-size: 34px; color: var(--white); margin: 2px 0 4px; }
@@ -281,7 +287,8 @@ table.t td.n { text-align: right; }
 /* ── checklist sheet ── */
 #m-sheet { border-top: 1px solid var(--green); background: var(--panel); }
 #m-sheet:empty { display: none; }
-.sbar { display: flex; align-items: stretch; }
+.sbar { display: flex; align-items: stretch; min-width: 0; }
+.sbar .btn.tick { flex: none; }
 .sinfo { flex: 1; min-width: 0; font: inherit; text-align: left; color: var(--green); background: transparent; border: 0; padding: 6px 10px; }
 .sinfo .sid { display: block; color: var(--cyan); font-size: 17px; }
 .sinfo .scur { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--white); font-size: 18px; }
@@ -357,6 +364,11 @@ table.t td.n { text-align: right; }
 .title p { margin: 16px 0; }
 .title .small { font-size: 16px; }
 
+/* Narrow phones: drop the site prefix so the status stays readable. */
+@media (max-width: 380px) {
+  #m-top .cx { display: none; }
+  #m-top { gap: 6px; padding: 6px 10px; }
+}
 @media (min-width: 641px) {
   #m-toast { left: calc(50% - 300px); right: calc(50% - 300px); }
 }

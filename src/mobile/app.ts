@@ -237,6 +237,8 @@ export function startMobile() {
     const p = params.get('page');
     if (p && /^F[1-9]$/.test(p)) ui.page = p as MPage;
     if (params.get('sheet') === '1') ui.sheetOpen = true;
+    const wo = params.get('wo');
+    if (wo && g.wos[wo]) ui.woSel = wo;
     const proc = params.get('proc');
     if (proc) g.procOpen(proc);
     const doc = params.get('doc');

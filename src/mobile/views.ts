@@ -102,7 +102,8 @@ export function sheetHTML(c: MCtx): string {
     const box = i < p.step ? '[X]' : i === p.step ? '[&gt;]' : '[ ]';
     return `<li class="${cls}"><span class="box">${box}</span><span class="k">${kind(s.kind)}</span><span>${i + 1}. ${esc(s.text)}</span></li>`;
   }).join('');
-  return bar + `<div class="sbody" data-scroll="sheet"><div class="stitle">${esc(def.id)} ${esc(def.title)}</div><ol class="steps">${steps}</ol>`
+  const title = def.title.startsWith(def.id) ? def.title : `${def.id} ${def.title}`;
+  return bar + `<div class="sbody" data-scroll="sheet"><div class="stitle">${esc(title)}</div><ol class="steps">${steps}</ol>`
     + `<div class="btns">${g.procs.length > 1 ? btn(c, 'pcyc', 'NEXT LIST', () => g.procCycle()) : ''}${btn(c, 'pclose', 'CLOSE LIST', () => say(g.procClose()), 'warn')}</div></div>`;
 }
 
