@@ -1,0 +1,57 @@
+:root {
+  --bg: #020403;
+}
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  overflow: hidden;
+}
+body {
+  display: grid;
+  place-items: center;
+}
+#crt {
+  position: relative;
+  line-height: 0;
+}
+#glow, #screen {
+  display: block;
+}
+#glow {
+  position: absolute;
+  inset: 0;
+  filter: blur(6px) brightness(1.4);
+  opacity: 0.45;
+  pointer-events: none;
+}
+#screen {
+  position: relative;
+  mix-blend-mode: screen;
+}
+#scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0.22) 3px, rgba(0, 0, 0, 0) 4px),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.45) 100%);
+}
+#scan::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(77, 255, 136, 0.02);
+  animation: flicker 0.15s infinite;
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #scan::after { animation: none; }
+}
+noscript {
+  color: #4dff88;
+  font-family: monospace;
+}
